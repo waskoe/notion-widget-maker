@@ -3,41 +3,54 @@
 <head>
     <title>Meeting Counter</title>
     <style>
-        h1 {
-            font-weight: bold;
-            font-size: 24px;
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
-        
+
         #counter {
+            display: inline-block;
+            padding: 10px;
+            background-color: black;
+            border-radius: 10px;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        h1 {
             font-size: 24px;
+            font-weight: normal;
         }
     </style>
 </head>
 <body>
+    <div id="counter">
+        <span id="months"></span>m <span id="days"></span>d
+    </div>
+
     <h1>Meeting Counter</h1>
-    
-    <p id="counter"></p>
-    
+
     <script>
         function calculateDate() {
             var inputDate = new Date("June 3, 2023");
             var currentDate = new Date();
-            
+
             var timeDiff = Math.abs(currentDate.getTime() - inputDate.getTime());
             var daysPast = Math.floor(timeDiff / (1000 * 3600 * 24));
-            
+
             var monthsPast = Math.floor(daysPast / 30);
             var daysRemaining = daysPast % 30;
-            
-            if (monthsPast > 0) {
-                var result = monthsPast + "m " + daysRemaining + "d";
-            } else {
-                var result = daysPast + "d";
-            }
-            
-            document.getElementById("counter").innerHTML = result;
+
+            document.getElementById("months").textContent = monthsPast;
+            document.getElementById("days").textContent = daysRemaining;
         }
-        
+
         // Call the calculateDate function when the page loads
         calculateDate();
     </script>
