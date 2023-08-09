@@ -5,15 +5,18 @@
     <style>
         h1 {
             font-weight: bold;
+            font-size: 24px;
+        }
+        
+        #counter {
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
     <h1>Meeting Counter</h1>
     
-    <p>Input Date: June 3, 2023</p>
-    
-    <p id="result"></p>
+    <p id="counter"></p>
     
     <script>
         function calculateDate() {
@@ -23,12 +26,16 @@
             var timeDiff = Math.abs(currentDate.getTime() - inputDate.getTime());
             var daysPast = Math.floor(timeDiff / (1000 * 3600 * 24));
             
-            var yearsPast = Math.floor(daysPast / 365);
-            var monthsPast = Math.floor((daysPast % 365) / 30);
+            var monthsPast = Math.floor(daysPast / 30);
+            var daysRemaining = daysPast % 30;
             
-            var result = monthsPast + "m " + daysPast + "d";
+            if (monthsPast > 0) {
+                var result = monthsPast + "m " + daysRemaining + "d";
+            } else {
+                var result = daysPast + "d";
+            }
             
-            document.getElementById("result").innerHTML = result;
+            document.getElementById("counter").innerHTML = result;
         }
         
         // Call the calculateDate function when the page loads
