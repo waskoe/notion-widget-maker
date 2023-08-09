@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Date Calculator</title>
+    <title>Meeting Counter</title>
+    <style>
+        h1 {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Date Calculator</h1>
+    <h1>Meeting Counter</h1>
     
     <p>Input Date: June 3, 2023</p>
     
@@ -21,8 +26,7 @@
             var yearsPast = Math.floor(daysPast / 365);
             var monthsPast = Math.floor((daysPast % 365) / 30);
             
-            var result = "Days Past: " + daysPast + "<br>";
-            result += "Months Past: " + (yearsPast * 12 + monthsPast);
+            var result = monthsPast + "m " + daysPast + "d";
             
             document.getElementById("result").innerHTML = result;
         }
