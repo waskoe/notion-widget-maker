@@ -5,40 +5,54 @@
     <style>
         body {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            background-color: beige;
         }
 
-        #counter {
-            display: inline-block;
-            padding: 10px;
+        .counter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             background-color: black;
             border-radius: 10px;
             color: white;
-            font-size: 36px;
+            font-size: 24px;
             font-weight: bold;
+            margin: 10px;
         }
 
-        h1 {
-            font-size: 24px;
+        .counter h2 {
+            font-size: 18px;
             font-weight: normal;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
-    <div id="counter">
-        <span id="months"></span>m <span id="days"></span>d
+    <div class="counter">
+        <div>
+            <span id="months"></span>m <span id="days"></span>d
+        </div>
+        <h2>Meeting Counter</h2>
     </div>
 
-    <h1>Meeting Counter</h1>
+    <div class="counter">
+        <div>
+            <span id="officialMonths"></span>m <span id="officialDays"></span>d
+        </div>
+        <h2>Official Counter</h2>
+    </div>
 
     <script>
-        function calculateDate() {
-            var inputDate = new Date("June 3, 2023");
+        function calculateDate(date, monthsId, daysId) {
+            var inputDate = new Date(date);
             var currentDate = new Date();
 
             var timeDiff = Math.abs(currentDate.getTime() - inputDate.getTime());
@@ -47,12 +61,15 @@
             var monthsPast = Math.floor(daysPast / 30);
             var daysRemaining = daysPast % 30;
 
-            document.getElementById("months").textContent = monthsPast;
-            document.getElementById("days").textContent = daysRemaining;
+            document.getElementById(monthsId).textContent = monthsPast;
+            document.getElementById(daysId).textContent = daysRemaining;
         }
 
-        // Call the calculateDate function when the page loads
-        calculateDate();
+        // Call the calculateDate function for Meeting Counter
+        calculateDate("June 3, 2023", "months", "days");
+
+        // Call the calculateDate function for Official Counter
+        calculateDate("July 27, 2023", "officialMonths", "officialDays");
     </script>
 </body>
 </html>
