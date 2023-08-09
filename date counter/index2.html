@@ -38,33 +38,28 @@
 <body>
     <div class="counter">
         <div>
-            <span id="years"></span>y <span id="months"></span>m <span id="days"></span>d
+            <span id="months"></span>m <span id="days"></span>d
         </div>
         <h2>Meeting Counter</h2>
     </div>
 
     <div class="counter">
         <div>
-            <span id="officialYears"></span>y <span id="officialMonths"></span>m <span id="officialDays"></span>d
+            <span id="officialMonths"></span>m <span id="officialDays"></span>d
         </div>
         <h2>Official Counter</h2>
     </div>
 
     <script>
-        function calculateDate(date, yearsId, monthsId, daysId) {
+        function calculateDate(date, monthsId, daysId) {
             var inputDate = new Date(date);
             var currentDate = new Date();
 
             var timeDiff = Math.abs(currentDate.getTime() - inputDate.getTime());
             var daysPast = Math.floor(timeDiff / (1000 * 3600 * 24));
 
-            var yearsPast = Math.floor(daysPast / 365);
-            var monthsPast = Math.floor((daysPast % 365) / 30);
+            var monthsPast = Math.floor(daysPast / 30);
             var daysRemaining = daysPast % 30;
-
-            if (yearsPast > 0) {
-                document.getElementById(yearsId).textContent = yearsPast + "y ";
-            }
 
             if (monthsPast > 0) {
                 document.getElementById(monthsId).textContent = monthsPast + "m ";
@@ -74,10 +69,10 @@
         }
 
         // Call the calculateDate function for Meeting Counter
-        calculateDate("June 3, 2023", "years", "months", "days");
+        calculateDate("June 3, 2023", "months", "days");
 
         // Call the calculateDate function for Official Counter
-        calculateDate("July 27, 2023", "officialYears", "officialMonths", "officialDays");
+        calculateDate("July 27, 2023", "officialMonths", "officialDays");
     </script>
 </body>
 </html>
