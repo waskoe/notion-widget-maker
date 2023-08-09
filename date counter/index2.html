@@ -14,6 +14,12 @@
             background-color: #eeddbb; /* Darker shade of beige */
         }
 
+        .counters-container {
+            display: flex;
+            justify-content: space-between; /* Separate the counters */
+            width: 80%; /* Adjust width as needed */
+        }
+
         .counter {
             display: flex;
             flex-direction: column;
@@ -25,7 +31,6 @@
             color: white;
             font-size: 24px;
             font-weight: bold;
-            margin: 10px;
         }
 
         .counter h2 {
@@ -36,18 +41,20 @@
     </style>
 </head>
 <body>
-    <div class="counter">
-        <div>
-            <span id="months"></span>m <span id="days"></span>d
+    <div class="counters-container">
+        <div class="counter">
+            <div>
+                <span id="months"></span>m <span id="days"></span>d
+            </div>
+            <h2>Meeting Counter</h2>
         </div>
-        <h2>Meeting Counter</h2>
-    </div>
 
-    <div class="counter">
-        <div>
-            <span id="officialMonths"></span><span id="officialDays"></span>d
+        <div class="counter">
+            <div>
+                <span id="officialMonths"></span><span id="officialDays"></span>d
+            </div>
+            <h2>Official Counter</h2>
         </div>
-        <h2>Official Counter</h2>
     </div>
 
     <script>
