@@ -5,6 +5,7 @@ var streakElement = document.getElementById('streak');
 var daysLeftElement = document.getElementById('days-left');
 var streakCount = 10;
 
+// Function to update the streak and related elements
 function updateStreak() {
     if (checkbox.checked) {
         checkbox.disabled = true; // Disable checkbox once it's checked
@@ -28,14 +29,19 @@ function updateStreak() {
     }
 }
 
+// Function to show days left until end of the week
 function showDaysLeft(today) {
     var daysLeft = 7 - today.getDay();
     daysLeftElement.textContent = 'Days left: ' + daysLeft;
 }
 
+// Function to hide days left
 function hideDaysLeft() {
     daysLeftElement.textContent = '';
 }
 
+// Add event listener to checkbox for updates
 checkbox.addEventListener('change', updateStreak);
+
+// Load initial streak state on page load
 updateStreak();
