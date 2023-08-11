@@ -7,7 +7,8 @@
 <body>
     <div class="container">
         <label>
-            <input type="checkbox" id="checkbox" onclick="disableCheckbox();">
+            <!-- Add "checked" attribute to persist checkbox state -->
+            <input type="checkbox" id="checkbox" checked onclick="disableCheckbox();">
             Date this week:
         </label>
         <div class="streak" id="streak">Streak: <span id="streak-count">10</span> <span class="fire">🔥</span></div>
