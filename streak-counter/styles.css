@@ -1,0 +1,17 @@
+/* styles.css */
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.streak {
+    font-size: 24px;
+}
+
+.fire {
+    font-size: 36px;
+}
+
+.red {
+    color: red;
+}
