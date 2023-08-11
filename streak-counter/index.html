@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Streak Counter</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <label>
-            <input type="checkbox" id="checkbox" onclick="updateStreak();">
-            Date this week:
-        </label>
-        <div class="streak" id="streak">Streak: <span id="streak-count">10</span> <span class="fire">🔥</span></div>
+        <div class="streak-box">
+            <label class="checkbox-container">
+                <input type="checkbox" id="checkbox">
+                <span class="checkmark"></span>
+            </label>
+            <span class="streak" id="streak">10</span>
+            <span class="fire" id="fire">🔥</span>
+        </div>
         <div class="days-left" id="days-left"></div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
