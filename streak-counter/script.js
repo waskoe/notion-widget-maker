@@ -1,6 +1,7 @@
 // script.js
 let lastChecked = false;
 let streak = 10;
+let lastStreak = streak;
 
 function updateStreak() {
     const checkbox = document.getElementById("checkbox");
@@ -11,7 +12,11 @@ function updateStreak() {
         lastChecked = checkbox.checked;
 
         if (checkbox.checked) {
-            streak++;
+            const currentDate = new Date();
+            if (currentDate.getDay() === 0 && streak !== lastStreak) {
+                streak++;
+                lastStreak = streak;
+            }
             daysLeft.textContent = "";
         } else {
             daysLeft.textContent = `Days left: ${7 - new Date().getDay()} days`;
