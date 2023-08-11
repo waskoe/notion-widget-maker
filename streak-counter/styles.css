@@ -2,6 +2,8 @@
 .container {
     text-align: center;
     margin-top: 50px;
+    background-color: #dbe4eb; /* Blue pastel shade */
+    padding: 20px;
 }
 
 .streak {
@@ -24,4 +26,9 @@
 /* Style checkbox when checked */
 #checkbox:checked + label {
     color: blue;
+}
+
+/* Style checkbox itself */
+#checkbox {
+    transform: scale(1.5); /* Increase checkbox size */
 }
