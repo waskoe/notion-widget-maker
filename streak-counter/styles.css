@@ -20,3 +20,8 @@
     font-size: 18px;
     margin-top: 10px;
 }
+
+/* Style checkbox when checked */
+#checkbox:checked + label {
+    color: blue;
+}
