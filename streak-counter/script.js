@@ -4,7 +4,7 @@ const fire = document.getElementById('fire');
 const daysLeft = document.getElementById('days-left');
 
 // Load streak count from local storage
-let currentStreak = parseInt(localStorage.getItem('streak')) || 10;
+let currentStreak = parseInt(localStorage.getItem('streak')) || 11; // Updated starting streak
 streak.textContent = currentStreak;
 
 // Set initial checkbox state
