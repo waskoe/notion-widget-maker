@@ -1,33 +1,35 @@
 body {
+    font-family: Arial, sans-serif;
+    background-color: #E0E5EC;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f4f8;
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-    font-weight: bold;
 }
 
 .widget {
-    background-color: #a7c5eb;
+    background-color: #B5D0FF;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
 }
 
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
+h2 {
+    margin: 0;
 }
 
-#number {
-    font-size: 24px;
-    font-weight: bold;
+#checkbox {
     margin: 0 10px;
+}
+
+#streak-number {
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+#fire-emoji {
+    font-size: 24px;
 }
 
 #warning-text {
