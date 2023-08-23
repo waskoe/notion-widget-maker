@@ -3,6 +3,9 @@ const checkbox = document.getElementById("checkbox");
 const streakNumber = document.getElementById("streak-number");
 const warningText = document.getElementById("warning-text");
 
+// Initial default number
+let defaultNumber = 12;
+
 // Update streak number display
 function updateStreakNumber() {
     streakNumber.textContent = defaultNumber;
@@ -26,14 +29,10 @@ function saveData() {
 }
 
 // Function to check if a week has passed
-function hasWeekPassed() {
-    if (!lastCheckedDate) {
-        return false;
-    }
-    
-    const lastChecked = new Date(lastCheckedDate);
+function hasWeekPassed(lastDate) {
     const currentDate = new Date();
-    
+    const lastChecked = new Date(lastDate);
+
     return (currentDate - lastChecked) >= 604800000; // 7 days in milliseconds
 }
 
@@ -51,25 +50,28 @@ checkbox.addEventListener("change", () => {
 });
 
 // Initial setup
-let defaultNumber = hasWeekPassed(localStorage.getItem("lastCheckedDate")) ? 0 : parseInt(localStorage.getItem("defaultNumber")) || 12;
+let lastCheckedDate = localStorage.getItem("lastCheckedDate");
+let storedNumber = parseInt(localStorage.getItem("defaultNumber"));
 
-// If a week has passed since last check, reset number to 0
-if (hasWeekPassed()) {
-    defaultNumber = 0;
-    checkbox.checked = false;
-    saveData();
+if (storedNumber && !hasWeekPassed(lastCheckedDate)) {
+    defaultNumber = storedNumber;
 }
 
 updateStreakNumber();
 updateWarningText(7 - new Date().getDay());
 
+// Check for passing a week interval
+if (hasWeekPassed(lastCheckedDate)) {
+    checkbox.checked = false;
+    saveData();
+    updateWarningText(7);
+}
+
 // Automatic unticking logic
 setInterval(() => {
-    if (hasWeekPassed()) {
-        defaultNumber = 0;
+    if (hasWeekPassed(lastCheckedDate)) {
         checkbox.checked = false;
         saveData();
-        updateStreakNumber();
         updateWarningText(7);
     }
 }, 1000); // Check every second
