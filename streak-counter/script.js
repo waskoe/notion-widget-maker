@@ -1,44 +1,23 @@
-const checkbox = document.getElementById('checkbox');
-const streak = document.getElementById('streak');
-const fire = document.getElementById('fire');
-const daysLeft = document.getElementById('days-left');
+const checkbox = document.getElementById("checkbox");
+const streakNumber = document.getElementById("streak-number");
+const warning = document.getElementById("warning");
 
-// Load streak count from local storage
-let currentStreak = parseInt(localStorage.getItem('streak')) || 11; // Updated starting streak
-streak.textContent = currentStreak;
+// Initialize streak counter
+let streakCount = 12;
 
-// Set initial checkbox state
-checkbox.checked = localStorage.getItem('checkbox') === 'true';
-
-// Update streak count and checkbox state
-checkbox.addEventListener('change', () => {
+checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
-        currentStreak++;
+        streakCount++;
     } else {
-        currentStreak--;
-        if (currentStreak < 0) {
-            currentStreak = 0;
-        }
+        streakCount--;
     }
-    streak.textContent = currentStreak;
-    localStorage.setItem('streak', currentStreak);
-    localStorage.setItem('checkbox', checkbox.checked);
-    updateDaysLeft();
+    updateStreak();
 });
 
-// Display days left in the current week
-function updateDaysLeft() {
-    if (!checkbox.checked) {
-        const daysUntilSunday = 7 - new Date().getDay();
-        if (daysUntilSunday > 2) {
-            daysLeft.textContent = `Days left: ${daysUntilSunday} days`;
-        } else {
-            daysLeft.textContent = `Calls for a date this week`;
-        }
-    } else {
-        daysLeft.textContent = '';
-    }
+function updateStreak() {
+    streakNumber.textContent = streakCount;
+    warning.style.display = "none";
 }
 
-updateDaysLeft();
-setInterval(updateDaysLeft, 1000 * 60 * 60); // Update every hour
+// Update streak on page load
+updateStreak();
