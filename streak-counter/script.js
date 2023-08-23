@@ -45,12 +45,11 @@ function hasWeekPassed() {
 checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
         defaultNumber++;
-        saveData();
     } else {
         defaultNumber = Math.max(0, defaultNumber - 1);
-        saveData();
     }
     
+    saveData();
     updateStreakNumber();
     updateWarningText(7 - new Date().getDay());
 });
@@ -61,7 +60,10 @@ updateWarningText(7 - new Date().getDay());
 
 // Check for passing a week interval
 if (hasWeekPassed()) {
-    defaultNumber += checkbox.checked ? 1 : 0;
+    if (checkbox.checked) {
+        defaultNumber++;
+    }
+    
     checkbox.checked = false;
     saveData();
     updateStreakNumber();
@@ -71,7 +73,10 @@ if (hasWeekPassed()) {
 // Automatic unticking logic
 setInterval(() => {
     if (hasWeekPassed()) {
-        defaultNumber += checkbox.checked ? 1 : 0;
+        if (checkbox.checked) {
+            defaultNumber++;
+        }
+        
         checkbox.checked = false;
         saveData();
         updateStreakNumber();
