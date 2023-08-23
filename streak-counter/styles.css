@@ -1,65 +1,28 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #dbe5f1;
-}
-
-.widget-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f4f8;
+    font-family: Arial, sans-serif;
 }
 
 .widget {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #89c3eb;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #a7c5eb;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
 }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
 }
 
-.checkbox-container {
-  display: inline-block;
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.checkbox-container input {
-  display: none;
-}
-
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 3px;
-}
-
-.streak-number {
-  font-size: 36px;
-}
-
-.fire-emoji {
-  font-size: 36px;
-}
-
-.warning-text {
-  font-size: 16px;
-  color: red;
-  font-weight: bold;
-  display: none;
+#number {
+    font-size: 24px;
+    margin: 0 10px;
 }
