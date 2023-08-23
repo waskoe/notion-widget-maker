@@ -1,47 +1,48 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    background-color: #aad2eb;
 }
 
-.widget {
-    background-color: white;
+.widget-container {
+    background-color: #bfe1ff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.checkbox-container {
+.widget-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.streak-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-input[type="checkbox"] {
-    display: none;
+.streak-info {
+    display: flex;
+    align-items: center;
 }
 
-label {
-    cursor: pointer;
-}
-
-#streak-number {
-    font-size: 24px;
+.streak-number {
+    font-size: 36px;
     margin: 0 10px;
 }
 
-.fire-emoji {
-    font-size: 24px;
+.streak-emoji {
+    font-size: 36px;
 }
 
-#warning {
-    color: red;
+.streak-message {
     font-weight: bold;
+    color: red;
     display: none;
 }
