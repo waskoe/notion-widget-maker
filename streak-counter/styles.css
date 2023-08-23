@@ -1,48 +1,27 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #aad2eb;
+#widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  background-color: #add8e6; /* Blue pastel background */
 }
 
-.widget-container {
-    background-color: #bfe1ff;
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+#checkbox {
+  font-size: 24px;
 }
 
-.widget-title {
-    font-size: 24px;
-    margin-bottom: 10px;
+#number {
+  font-size: 24px;
 }
 
-.streak-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
+#fire {
+  font-size: 24px;
 }
 
-.streak-info {
-    display: flex;
-    align-items: center;
-}
-
-.streak-number {
-    font-size: 36px;
-    margin: 0 10px;
-}
-
-.streak-emoji {
-    font-size: 36px;
-}
-
-.streak-message {
-    font-weight: bold;
-    color: red;
-    display: none;
+#warning {
+  font-size: 18px;
+  color: red;
+  display: none;
 }
