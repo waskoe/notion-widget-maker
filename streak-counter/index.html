@@ -7,15 +7,16 @@
     <title>Date Streak Widget</title>
 </head>
 <body>
-    <div class="widget">
-        <h2>Date Streak</h2>
-        <div class="checkbox-container">
-            <input type="checkbox" id="checkbox">
-            <label for="checkbox">✅</label>
-            <span id="streak-number">12</span>
-            <span class="fire-emoji">🔥</span>
+    <div class="widget-container">
+        <h1 class="widget-title">Date Streak</h1>
+        <div class="streak-container">
+            <input type="checkbox" id="streakCheckbox">
+            <div class="streak-info">
+                <p class="streak-number" id="streakNumber">12</p>
+                <span class="streak-emoji">🔥</span>
+            </div>
         </div>
-        <p id="warning">Save your date streak!</p>
+        <p class="streak-message" id="streakMessage">Save your streak!</p>
     </div>
     <script src="script.js"></script>
 </body>
