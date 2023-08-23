@@ -1,53 +1,51 @@
 // DOM elements
-const checkbox = document.getElementById('checkbox');
-const numberElement = document.getElementById('number');
-const warningText = document.getElementById('warning-text');
+const checkbox = document.getElementById("checkbox");
+const streakNumber = document.getElementById("streak-number");
+const warningText = document.getElementById("warning-text");
 
-// Initial values
-let streakNumber = 12; // Default starting point
-let lastTickedDay = new Date().getDay(); // Initialize with current day
+// Initial default number
+let defaultNumber = 12;
 
-// Update checkbox and number based on streakNumber
-function updateDisplay() {
-    checkbox.checked = streakNumber > 0;
-    numberElement.textContent = streakNumber;
+// Update streak number display
+function updateStreakNumber() {
+    streakNumber.textContent = defaultNumber;
 }
 
-// Update the warning text
+// Update warning text
 function updateWarningText(daysLeft) {
     if (daysLeft === 2) {
-        warningText.style.display = 'block';
+        warningText.style.display = "block";
+        warningText.textContent = "Save your dating streak";
     } else {
-        warningText.style.display = 'none';
+        warningText.style.display = "none";
+        warningText.textContent = "";
     }
 }
 
-// Check if a week has passed
-function hasWeekPassed() {
-    const currentDay = new Date().getDay();
-    return currentDay < lastTickedDay;
-}
-
-// Update streakNumber when checkbox is clicked
-checkbox.addEventListener('click', () => {
+// Handle checkbox change
+checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
-        streakNumber += 1;
+        defaultNumber++;
+        updateStreakNumber();
+        updateWarningText(7 - new Date().getDay());
     } else {
-        streakNumber -= 1;
+        defaultNumber = Math.max(0, defaultNumber - 1);
+        updateStreakNumber();
+        updateWarningText(7 - new Date().getDay());
     }
-    updateDisplay();
 });
 
-// Update display and warning text
-updateDisplay();
-updateWarningText();
+// Initial setup
+updateStreakNumber();
+updateWarningText(7 - new Date().getDay());
 
-// Check if a week has passed every minute
+// Automatic unticking logic
 setInterval(() => {
-    if (hasWeekPassed()) {
-        streakNumber += 1;
-        lastTickedDay = new Date().getDay();
-        updateDisplay();
-        updateWarningText();
+    const currentDay = new Date().getDay();
+    if (currentDay === 0 && checkbox.checked) {
+        defaultNumber++;
+        updateStreakNumber();
+        checkbox.checked = false;
+        updateWarningText(7);
     }
-}, 60000); // Check every minute
+}, 1000); // Check every second
