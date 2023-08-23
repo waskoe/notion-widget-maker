@@ -4,7 +4,8 @@ const streakNumber = document.getElementById("streak-number");
 const warningText = document.getElementById("warning-text");
 
 // Initial default number
-let defaultNumber = 12;
+const baseNumber = 12;
+let defaultNumber = baseNumber;
 
 // Update streak number display
 function updateStreakNumber() {
@@ -38,10 +39,10 @@ function hasWeekPassed(lastDate) {
 
 // Handle checkbox change
 checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
+    if (checkbox.checked && defaultNumber < baseNumber + 1) {
         defaultNumber++;
     } else {
-        defaultNumber = Math.max(12, defaultNumber - 1);
+        defaultNumber = Math.max(baseNumber, defaultNumber - 1);
     }
     
     saveData();
