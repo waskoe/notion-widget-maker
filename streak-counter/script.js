@@ -65,14 +65,15 @@ if (storedNumber && !hasWeekPassed(lastCheckedDate)) {
 updateStreakNumber();
 updateWarningText(7 - new Date().getDay());
 
-// Check for passing a week interval
+// Automatic unticking logic
 if (hasWeekPassed(lastCheckedDate)) {
     checkbox.checked = false;
     saveData();
     updateWarningText(7);
+} else {
+    checkbox.checked = true;
 }
 
-// Automatic unticking logic
 setInterval(() => {
     if (hasWeekPassed(lastCheckedDate)) {
         checkbox.checked = false;
