@@ -1,41 +1,53 @@
+// DOM elements
 const checkbox = document.getElementById('checkbox');
-const streakNumber = document.getElementById('streakNumber');
-const warningText = document.getElementById('warningText');
+const numberElement = document.getElementById('number');
+const warningText = document.getElementById('warning-text');
 
-let currentStreak = 12; // Starting point
-let lastCheckedTime = new Date();
+// Initial values
+let streakNumber = 12; // Default starting point
+let lastTickedDay = new Date().getDay(); // Initialize with current day
 
-checkbox.addEventListener('change', function () {
-  if (this.checked) {
-    currentStreak += 1;
-    lastCheckedTime = new Date();
-    warningText.style.display = 'none';
-  } else {
-    currentStreak -= 1;
-  }
-  updateStreak();
+// Update checkbox and number based on streakNumber
+function updateDisplay() {
+    checkbox.checked = streakNumber > 0;
+    numberElement.textContent = streakNumber;
+}
+
+// Update the warning text
+function updateWarningText(daysLeft) {
+    if (daysLeft === 2) {
+        warningText.style.display = 'block';
+    } else {
+        warningText.style.display = 'none';
+    }
+}
+
+// Check if a week has passed
+function hasWeekPassed() {
+    const currentDay = new Date().getDay();
+    return currentDay < lastTickedDay;
+}
+
+// Update streakNumber when checkbox is clicked
+checkbox.addEventListener('click', () => {
+    if (checkbox.checked) {
+        streakNumber += 1;
+    } else {
+        streakNumber -= 1;
+    }
+    updateDisplay();
 });
 
-function updateStreak() {
-  streakNumber.textContent = currentStreak;
-}
+// Update display and warning text
+updateDisplay();
+updateWarningText();
 
-function checkStreak() {
-  const currentTime = new Date();
-  const daysPassed = Math.floor((currentTime - lastCheckedTime) / (1000 * 60 * 60 * 24));
-  
-  if (daysPassed >= 7) {
-    currentStreak = 0;
-    lastCheckedTime = currentTime;
-    updateStreak();
-  }
-
-  if (daysPassed >= 5 && daysPassed < 7) {
-    warningText.style.display = 'block';
-  } else {
-    warningText.style.display = 'none';
-  }
-}
-
-checkStreak();
-setInterval(checkStreak, 1000 * 60 * 60); // Check every hour
+// Check if a week has passed every minute
+setInterval(() => {
+    if (hasWeekPassed()) {
+        streakNumber += 1;
+        lastTickedDay = new Date().getDay();
+        updateDisplay();
+        updateWarningText();
+    }
+}, 60000); // Check every minute
