@@ -3,10 +3,6 @@ const checkbox = document.getElementById("checkbox");
 const streakNumber = document.getElementById("streak-number");
 const warningText = document.getElementById("warning-text");
 
-// Initial default number
-let defaultNumber = parseInt(localStorage.getItem("defaultNumber")) || 12;
-let lastCheckedDate = localStorage.getItem("lastCheckedDate");
-
 // Update streak number display
 function updateStreakNumber() {
     streakNumber.textContent = defaultNumber;
@@ -30,14 +26,10 @@ function saveData() {
 }
 
 // Function to check if a week has passed
-function hasWeekPassed() {
-    if (!lastCheckedDate) {
-        return false;
-    }
-    
-    const lastChecked = new Date(lastCheckedDate);
+function hasWeekPassed(lastDate) {
     const currentDate = new Date();
-    
+    const lastChecked = new Date(lastDate);
+
     return (currentDate - lastChecked) >= 604800000; // 7 days in milliseconds
 }
 
@@ -45,38 +37,22 @@ function hasWeekPassed() {
 checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
         defaultNumber++;
-    } else {
-        defaultNumber = Math.max(0, defaultNumber - 1);
+        saveData();
+        updateStreakNumber();
+        updateWarningText(7 - new Date().getDay());
     }
-    
-    saveData();
-    updateStreakNumber();
-    updateWarningText(7 - new Date().getDay());
 });
 
 // Initial setup
+let defaultNumber = hasWeekPassed(localStorage.getItem("lastCheckedDate")) ? 0 : parseInt(localStorage.getItem("defaultNumber")) || 12;
+
 updateStreakNumber();
 updateWarningText(7 - new Date().getDay());
 
-// Check for passing a week interval
-if (hasWeekPassed()) {
-    if (checkbox.checked) {
-        defaultNumber++;
-    }
-    
-    checkbox.checked = false;
-    saveData();
-    updateStreakNumber();
-    updateWarningText(7);
-}
-
 // Automatic unticking logic
 setInterval(() => {
-    if (hasWeekPassed()) {
-        if (checkbox.checked) {
-            defaultNumber++;
-        }
-        
+    if (hasWeekPassed(localStorage.getItem("lastCheckedDate"))) {
+        defaultNumber = 0;
         checkbox.checked = false;
         saveData();
         updateStreakNumber();
