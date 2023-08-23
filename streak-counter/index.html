@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <title>Date Streak Widget</title>
 </head>
 <body>
-  <div id="widget">
-    <h1>Date Streak</h1>
-    <input type="checkbox" id="checkbox">
-    <p id="number">12</p>
-    <p id="fire">🔥</p>
-    <p id="warning">Save your dating streak</p>
+  <div class="widget-container">
+    <div class="widget">
+      <h1>Date Streak</h1>
+      <label class="checkbox-container">
+        <input type="checkbox" id="checkbox">
+        <span class="checkmark"></span>
+      </label>
+      <p class="streak-number" id="streakNumber">12</p>
+      <span class="fire-emoji">🔥</span>
+      <p class="warning-text" id="warningText">Save your dating streak</p>
+    </div>
   </div>
-  <script src="script.js"></script>
 </body>
 </html>
