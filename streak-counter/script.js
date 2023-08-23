@@ -1,23 +1,29 @@
-const checkbox = document.getElementById("checkbox");
-const streakNumber = document.getElementById("streak-number");
-const warning = document.getElementById("warning");
+const checkbox = document.getElementById('streakCheckbox');
+const streakNumber = document.getElementById('streakNumber');
+const streakMessage = document.getElementById('streakMessage');
 
-// Initialize streak counter
-let streakCount = 12;
-
-checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-        streakCount++;
-    } else {
-        streakCount--;
-    }
-    updateStreak();
-});
+checkbox.addEventListener('change', updateStreak);
 
 function updateStreak() {
-    streakNumber.textContent = streakCount;
-    warning.style.display = "none";
+    if (checkbox.checked) {
+        streakNumber.textContent = parseInt(streakNumber.textContent) + 1;
+        streakMessage.style.display = 'none';
+    } else {
+        streakNumber.textContent = parseInt(streakNumber.textContent) - 1;
+        streakMessage.style.display = 'none';
+    }
 }
 
-// Update streak on page load
-updateStreak();
+// Simulate automatic unticking after a week (7 seconds for demonstration)
+setTimeout(() => {
+    checkbox.checked = false;
+    updateStreak();
+    streakMessage.style.display = 'block';
+}, 7000); // Change this to 7 days (7 * 24 * 60 * 60 * 1000) for a week
+
+// Reset streak on click and remove the message
+streakMessage.addEventListener('click', () => {
+    streakNumber.textContent = 0;
+    checkbox.checked = true;
+    streakMessage.style.display = 'none';
+});
