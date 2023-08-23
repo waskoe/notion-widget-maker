@@ -6,6 +6,8 @@ body {
     margin: 0;
     background-color: #f0f4f8;
     font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .widget {
@@ -24,5 +26,12 @@ body {
 
 #number {
     font-size: 24px;
+    font-weight: bold;
     margin: 0 10px;
+}
+
+#warning-text {
+    color: red;
+    font-weight: bold;
+    display: none;
 }
