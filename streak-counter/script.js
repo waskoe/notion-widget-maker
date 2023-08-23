@@ -1,51 +1,61 @@
-// DOM elements
-const checkbox = document.getElementById("checkbox");
-const streakNumber = document.getElementById("streak-number");
-const warningText = document.getElementById("warning-text");
-
-// Initial default number
-let defaultNumber = 12;
-
-// Update streak number display
-function updateStreakNumber() {
-    streakNumber.textContent = defaultNumber;
-}
-
-// Update warning text
-function updateWarningText(daysLeft) {
-    if (daysLeft === 2) {
-        warningText.style.display = "block";
-        warningText.textContent = "Save your dating streak";
-    } else {
-        warningText.style.display = "none";
-        warningText.textContent = "";
-    }
-}
-
-// Handle checkbox change
-checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-        defaultNumber++;
-        updateStreakNumber();
-        updateWarningText(7 - new Date().getDay());
-    } else {
-        defaultNumber = Math.max(0, defaultNumber - 1);
-        updateStreakNumber();
-        updateWarningText(7 - new Date().getDay());
-    }
-});
-
 // Initial setup
-updateStreakNumber();
-updateWarningText(7 - new Date().getDay());
-
-// Automatic unticking logic
-setInterval(() => {
-    const currentDay = new Date().getDay();
-    if (currentDay === 0 && checkbox.checked) {
-        defaultNumber++;
-        updateStreakNumber();
-        checkbox.checked = false;
-        updateWarningText(7);
+window.addEventListener('DOMContentLoaded', () => {
+    updateStreakNumber();
+    updateWarningText(7 - new Date().getDay());
+    
+    // Set a flag to indicate that the initial setup is complete
+    let initialSetupComplete = false;
+    
+    // Check if the widget was just loaded and it's not Sunday yet
+    if (new Date().getDay() !== 0 && checkbox.checked) {
+        // Disable the checkbox until it's Sunday
+        checkbox.disabled = true;
+        
+        // Calculate the time until Sunday at 11:59 PM
+        const now = new Date();
+        const daysUntilSunday = 7 - now.getDay();
+        const hoursUntilSunday = 23 - now.getHours();
+        const minutesUntilSunday = 59 - now.getMinutes();
+        const millisecondsUntilSunday = daysUntilSunday * 24 * 60 * 60 * 1000 +
+            hoursUntilSunday * 60 * 60 * 1000 +
+            minutesUntilSunday * 60 * 1000;
+        
+        // Enable the checkbox and update the warning text when it's Sunday
+        setTimeout(() => {
+            checkbox.disabled = false;
+            updateWarningText(2);
+        }, millisecondsUntilSunday);
+        
+        // Indicate that the initial setup is complete
+        initialSetupComplete = true;
     }
-}, 1000); // Check every second
+    
+    // Automatic unticking logic
+    setInterval(() => {
+        const currentDay = new Date().getDay();
+        
+        if (currentDay === 0 && checkbox.checked && initialSetupComplete) {
+            defaultNumber++;
+            updateStreakNumber();
+            checkbox.checked = false;
+            updateWarningText(7);
+            initialSetupComplete = false;
+            
+            // Calculate the time until the next Sunday
+            const now = new Date();
+            const daysUntilSunday = 7;
+            const hoursUntilSunday = 23 - now.getHours();
+            const minutesUntilSunday = 59 - now.getMinutes();
+            const millisecondsUntilSunday = daysUntilSunday * 24 * 60 * 60 * 1000 +
+                hoursUntilSunday * 60 * 60 * 1000 +
+                minutesUntilSunday * 60 * 1000;
+            
+            // Enable the checkbox and update the warning text when it's the next Sunday
+            setTimeout(() => {
+                checkbox.disabled = false;
+                updateWarningText(2);
+                initialSetupComplete = true;
+            }, millisecondsUntilSunday);
+        }
+    }, 1000); // Check every second
+});
