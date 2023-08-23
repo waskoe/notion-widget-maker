@@ -1,27 +1,65 @@
-#widget {
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #dbe5f1;
+}
+
+.widget-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.widget {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 200px;
-  background-color: #add8e6; /* Blue pastel background */
+  padding: 20px;
+  background-color: #89c3eb;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-#checkbox {
+h1 {
   font-size: 24px;
+  margin-bottom: 10px;
 }
 
-#number {
-  font-size: 24px;
+.checkbox-container {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 10px;
 }
 
-#fire {
-  font-size: 24px;
+.checkbox-container input {
+  display: none;
 }
 
-#warning {
-  font-size: 18px;
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+
+.streak-number {
+  font-size: 36px;
+}
+
+.fire-emoji {
+  font-size: 36px;
+}
+
+.warning-text {
+  font-size: 16px;
   color: red;
+  font-weight: bold;
   display: none;
 }
