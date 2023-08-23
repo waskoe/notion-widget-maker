@@ -10,7 +10,7 @@ body {
 
 .widget {
     background-color: #B5D0FF;
-    padding: 90px; /* Increase padding to make the frame bigger */
+    padding: 60px; /* Increase padding to make the frame bigger */
     border-radius: 15px; /* Adjust border radius for rounded corners */
     text-align: center;
 }
