@@ -39,15 +39,19 @@ function hasWeekPassed(lastDate) {
 
 // Handle checkbox change
 checkbox.addEventListener("change", () => {
-    if (checkbox.checked && defaultNumber < baseNumber + 1) {
-        defaultNumber++;
+    if (checkbox.checked) {
+        if (defaultNumber < baseNumber + 1) {
+            defaultNumber++;
+            saveData();
+            updateStreakNumber();
+            updateWarningText(7 - new Date().getDay());
+        }
     } else {
         defaultNumber = Math.max(baseNumber, defaultNumber - 1);
+        saveData();
+        updateStreakNumber();
+        updateWarningText(7 - new Date().getDay());
     }
-    
-    saveData();
-    updateStreakNumber();
-    updateWarningText(7 - new Date().getDay());
 });
 
 // Initial setup
