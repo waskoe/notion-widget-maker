@@ -26,10 +26,14 @@ function saveData() {
 }
 
 // Function to check if a week has passed
-function hasWeekPassed(lastDate) {
+function hasWeekPassed() {
+    if (!lastCheckedDate) {
+        return false;
+    }
+    
+    const lastChecked = new Date(lastCheckedDate);
     const currentDate = new Date();
-    const lastChecked = new Date(lastDate);
-
+    
     return (currentDate - lastChecked) >= 604800000; // 7 days in milliseconds
 }
 
@@ -37,21 +41,31 @@ function hasWeekPassed(lastDate) {
 checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
         defaultNumber++;
-        saveData();
-        updateStreakNumber();
-        updateWarningText(7 - new Date().getDay());
+    } else {
+        defaultNumber = Math.max(12, defaultNumber - 1);
     }
+    
+    saveData();
+    updateStreakNumber();
+    updateWarningText(7 - new Date().getDay());
 });
 
 // Initial setup
 let defaultNumber = hasWeekPassed(localStorage.getItem("lastCheckedDate")) ? 0 : parseInt(localStorage.getItem("defaultNumber")) || 12;
+
+// If a week has passed since last check, reset number to 0
+if (hasWeekPassed()) {
+    defaultNumber = 0;
+    checkbox.checked = false;
+    saveData();
+}
 
 updateStreakNumber();
 updateWarningText(7 - new Date().getDay());
 
 // Automatic unticking logic
 setInterval(() => {
-    if (hasWeekPassed(localStorage.getItem("lastCheckedDate"))) {
+    if (hasWeekPassed()) {
         defaultNumber = 0;
         checkbox.checked = false;
         saveData();
