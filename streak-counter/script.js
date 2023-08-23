@@ -4,7 +4,8 @@ const streakNumber = document.getElementById("streak-number");
 const warningText = document.getElementById("warning-text");
 
 // Initial default number
-let defaultNumber = 12;
+let defaultNumber = parseInt(localStorage.getItem("defaultNumber")) || 12;
+let lastCheckedDate = localStorage.getItem("lastCheckedDate");
 
 // Update streak number display
 function updateStreakNumber() {
@@ -22,17 +23,22 @@ function updateWarningText(daysLeft) {
     }
 }
 
-// Function to save current date in local storage
-function saveDate() {
+// Function to save current date and defaultNumber in local storage
+function saveData() {
     localStorage.setItem("lastCheckedDate", new Date().toString());
+    localStorage.setItem("defaultNumber", defaultNumber.toString());
 }
 
 // Function to check if a week has passed
 function hasWeekPassed() {
-    const lastCheckedDate = new Date(localStorage.getItem("lastCheckedDate"));
+    if (!lastCheckedDate) {
+        return false;
+    }
+    
+    const lastChecked = new Date(lastCheckedDate);
     const currentDate = new Date();
     
-    return (currentDate - lastCheckedDate) >= 604800000; // 7 days in milliseconds
+    return (currentDate - lastChecked) >= 604800000; // 7 days in milliseconds
 }
 
 // Handle checkbox change
@@ -41,11 +47,12 @@ checkbox.addEventListener("change", () => {
         defaultNumber++;
         updateStreakNumber();
         updateWarningText(7 - new Date().getDay());
-        saveDate();
+        saveData();
     } else {
         defaultNumber = Math.max(0, defaultNumber - 1);
         updateStreakNumber();
         updateWarningText(7 - new Date().getDay());
+        saveData();
     }
 });
 
@@ -58,7 +65,7 @@ if (hasWeekPassed() && checkbox.checked) {
     defaultNumber++;
     updateStreakNumber();
     checkbox.checked = false;
-    saveDate();
+    saveData();
 }
 
 // Automatic unticking logic
@@ -67,6 +74,6 @@ setInterval(() => {
         defaultNumber++;
         updateStreakNumber();
         checkbox.checked = false;
-        saveDate();
+        saveData();
     }
 }, 1000); // Check every second
